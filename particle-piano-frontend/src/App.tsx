@@ -1,26 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const eventSourceUrl = "http://localhost:3001/events";
 
-export default App;
+export const App = () => {
+  const [currentNote, setCurrentNote] = useState<number>();
+  const [listening, setListening] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!listening) {
+      const events = new EventSource(eventSourceUrl);
+      events.onmessage = (event) => {
+        const parsedData = JSON.parse(event.data);
+        const note = parsedData?.index;
+        setCurrentNote(note);
+      };
+
+      setListening(true);
+    }
+  }, [listening, currentNote]);
+
+  return <h1>{currentNote}</h1>;
+};
