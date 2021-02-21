@@ -2,6 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
+// Based on: https://www.digitalocean.com/community/tutorials/nodejs-server-sent-events-build-realtime-app
+
 // If this were ts
 // interface note {
 //     index: Number;

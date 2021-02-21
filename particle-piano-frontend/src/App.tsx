@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
+import { Piano } from "./Piano";
 
 const eventSourceUrl = "http://localhost:3001/events";
 
@@ -20,5 +21,10 @@ export const App = () => {
     }
   }, [listening, currentNote]);
 
-  return <h1>{currentNote}</h1>;
+  return (
+    <div>
+      <h1>{currentNote}</h1>
+      <Piano activeNote={currentNote} />
+    </div>
+  );
 };
