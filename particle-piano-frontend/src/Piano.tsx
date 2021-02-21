@@ -8,14 +8,10 @@ export interface IPianoProps {
 }
 // TODO: figure out conversion for correct tone playing (key highlights will work when this is correct)
 // TODO: use memo and callback
+// TODO: center piano
 export const Piano: React.FC<IPianoProps> = (props) => {
   const firstNote = MidiNumbers.fromNote("c2");
   const lastNote = MidiNumbers.fromNote("B3");
-  const keyboardShortcuts = KeyboardShortcuts.create({
-    firstNote: firstNote,
-    lastNote: lastNote,
-    keyboardConfig: KeyboardShortcuts.HOME_ROW,
-  });
   const synth = new Tone.Synth().toDestination();
   const convertMidiNumberForTone = (midiNumber: number) => {
     return midiNumber + 50;
@@ -27,13 +23,13 @@ export const Piano: React.FC<IPianoProps> = (props) => {
       playNote={(midiNumber: number) => {
         synth.triggerAttackRelease(convertMidiNumberForTone(midiNumber), "8n");
       }}
+      stopNote={(midiNumber: number) => {}}
       activeNotes={
         props.activeNote
           ? [convertMidiNumberForTone(props.activeNote)]
           : undefined
       }
       width={700}
-      keyboardShortcuts={keyboardShortcuts}
     />
   );
 };
