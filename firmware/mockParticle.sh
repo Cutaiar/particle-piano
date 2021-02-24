@@ -9,5 +9,5 @@ do
         -H "Content-Type: application/json" \
         -d '{"index":'"$index"'}'\
         -s http://localhost:3001/note
-    sleep 5
+    sleep 1
 done
