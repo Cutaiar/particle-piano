@@ -1,3 +1,9 @@
+/******************************************************/
+//       THIS IS A GENERATED FILE - DO NOT EDIT       //
+/******************************************************/
+
+#include "Particle.h"
+#line 1 "/Users/joco0093/Documents/dev/particle-piano/firmware/src/particle-test.ino"
 /*
  * Project particle-test
  * Description:
@@ -5,6 +11,10 @@
  * Date:
  */
 
+void setup();
+void loop();
+raw_interrupt_handler_t handle_key_press();
+#line 8 "/Users/joco0093/Documents/dev/particle-piano/firmware/src/particle-test.ino"
 using namespace std;
 
 // setup() runs once, when the device is first turned on.
