@@ -13,7 +13,7 @@ export const App = () => {
       const events = new EventSource(eventSourceUrl);
       events.onmessage = (event) => {
         const parsedData = JSON.parse(event.data);
-        const note = parsedData?.index;
+        const note = Number(parsedData?.index);
         setCurrentNote(note);
       };
 
