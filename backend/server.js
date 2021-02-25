@@ -46,8 +46,11 @@ function sendEventsToAll(note) {
 
 // Middleware for POST /note endpoint
 async function notePressed(req, res, next) {
-  const note = req.body;
+  console.log("request received:");
+  console.log(req.body);
+  const index = req.body.data;
   // Send recently added nest as POST result
+  const note = { index: index };
   res.json(note);
   // Invoke iterate and send function
   return sendEventsToAll(note);
@@ -63,7 +66,7 @@ app.post("/note", notePressed);
 app.get("/events", eventsHandler);
 app.get("/status", (req, res) => res.json({ clients: clients.length }));
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 let clients = [];
 
 app.listen(PORT);
