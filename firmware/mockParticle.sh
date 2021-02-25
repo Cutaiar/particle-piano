@@ -7,7 +7,7 @@ do
     echo "POST to server with data $index at $now"
     curl -X POST \
         -H "Content-Type: application/json" \
-        -d '{"index":'"$index"'}'\
+        -d '{"data": {"index":'"$index"'}}'\
         -s http://localhost:3001/note
     sleep 1
 done

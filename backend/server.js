@@ -46,7 +46,9 @@ function sendEventsToAll(note) {
 
 // Middleware for POST /note endpoint
 async function notePressed(req, res, next) {
-  const note = req.body;
+  console.log("request received:");
+  console.log(req.body);
+  const note = req.body.data;
   // Send recently added nest as POST result
   res.json(note);
   // Invoke iterate and send function
