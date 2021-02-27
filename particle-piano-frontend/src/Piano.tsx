@@ -38,18 +38,20 @@ export const Piano: React.FC<IPianoProps> = (props) => {
   const lastNote = MidiNumbers.fromNote("e5");
 
   return (
-    <RPiano
-      noteRange={{ first: firstNote, last: lastNote }}
-      playNote={(midiNumber: number) => {
-        console.log("play note: " + midiNumber);
-        synth.triggerAttackRelease(midiNumberToNote(midiNumber), "8n");
-      }}
-      stopNote={(midiNumber: number) => {}}
-      activeNotes={
-        props.activeNote
-          ? [convertIndexToMidiNumber(props.activeNote)]
-          : undefined
-      }
-    />
+    <div style={{ width: "100%", height: "200px" }}>
+      <RPiano
+        noteRange={{ first: firstNote, last: lastNote }}
+        playNote={(midiNumber: number) => {
+          console.log("play note: " + midiNumber);
+          synth.triggerAttackRelease(midiNumberToNote(midiNumber), "8n");
+        }}
+        stopNote={(midiNumber: number) => {}}
+        activeNotes={
+          props.activeNote
+            ? [convertIndexToMidiNumber(props.activeNote)]
+            : undefined
+        }
+      />
+    </div>
   );
 };
