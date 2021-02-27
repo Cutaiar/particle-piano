@@ -7,12 +7,14 @@
 
 using namespace std;
 
+SerialLogHandler logHandler;
+
 // setup() runs once, when the device is first turned on.
 void setup() {
   // Put initialization like pinMode and begin functions here.
   
-  pinMode(D5, INPUT);
-  pinMode(D6, INPUT);
+  pinMode(D5, INPUT_PULLDOWN);
+  pinMode(D6, OUTPUT);
   pinMode(A2, INPUT);
   pinMode(TX, INPUT);
   pinMode(D1, INPUT);
@@ -22,17 +24,20 @@ void setup() {
   pinMode(D7, INPUT);
   pinMode(A7, INPUT);
 
+  digitalWrite(D6, HIGH);
   attachInterrupt(D5, handle_key_press, RISING);
-  attachInterrupt(D6, handle_key_press, RISING);
-  attachInterrupt(A2, handle_key_press, RISING);
-  attachInterrupt(TX, handle_key_press, RISING);
-  attachInterrupt(RX, handle_key_press, RISING);
-  attachInterrupt(D1, handle_key_press, RISING);
-  attachInterrupt(D2, handle_key_press, RISING);
-  attachInterrupt(D3, handle_key_press, RISING);
-  attachInterrupt(D4, handle_key_press, RISING);
-  attachInterrupt(D7, handle_key_press, RISING);
-  attachInterrupt(A7, handle_key_press, RISING);
+  // attachInterrupt(D6, handle_key_press, RISING);
+  // attachInterrupt(A2, handle_key_press, RISING);
+  // attachInterrupt(TX, handle_key_press, RISING);
+  // attachInterrupt(RX, handle_key_press, RISING);
+  // attachInterrupt(D1, handle_key_press, RISING);
+  // attachInterrupt(D2, handle_key_press, RISING);
+  // attachInterrupt(D3, handle_key_press, RISING);
+  // attachInterrupt(D4, handle_key_press, RISING);
+  // attachInterrupt(D7, handle_key_press, RISING);
+  // attachInterrupt(A7, handle_key_press, RISING);
+
+  Log.info("test");
   
 }
 
@@ -40,17 +45,15 @@ void setup() {
 void loop() {
   // digitalWrite(led, HIGH);   // Turn ON the LED
   
-  while(1){
-      handle_key_press();
-      delay(300);
-  }
   
 }
 
 raw_interrupt_handler_t handle_key_press() {
   // int keys[11];
   // string key_pressed;
-  // keys[0] = digitalRead(D5);
+  Log.info("made it here");
+  String keys;
+  keys = digitalRead(D5);
   // keys[1] = digitalRead(D6);
   // keys[2] = digitalRead(A2);
   // keys[3] = digitalRead(TX);
@@ -68,10 +71,10 @@ raw_interrupt_handler_t handle_key_press() {
   //   }
   // }
 
-  String temp = String(random(0, 23));
+  // String temp = String(random(0, 23));
   // String data = "{\"index\": {{{temp}}}}";
   
-  Particle.publish("keyPress", temp, PRIVATE);
+  Particle.publish("keyPress", keys, PRIVATE);
 
   return 0;
 }
