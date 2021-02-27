@@ -23,7 +23,11 @@ export const App = () => {
 
   return (
     <div>
-      <h1>{currentNote}</h1>
+      <h1>The Particle Piano</h1>
+      <h1>
+        {currentNote && "Note: "}
+        {currentNote}
+      </h1>
       <Piano activeNote={currentNote} />
     </div>
   );
