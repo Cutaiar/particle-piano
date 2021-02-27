@@ -50,7 +50,6 @@ export const Piano: React.FC<IPianoProps> = (props) => {
           ? [convertIndexToMidiNumber(props.activeNote)]
           : undefined
       }
-      width={700}
     />
   );
 };
